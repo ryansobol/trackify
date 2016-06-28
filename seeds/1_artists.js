@@ -10,5 +10,10 @@ exports.seed = function(knex) {
         id: 2,
         name: 'Adele'
       }]);
+    })
+    .then(() => {
+      return knex.raw(
+        "SELECT setval('artists_id_seq', (SELECT MAX(id) FROM artists));"
+      );
     });
 };

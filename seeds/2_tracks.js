@@ -44,5 +44,10 @@ exports.seed = function(knex) {
         title: 'Someone Like You',
         likes: 112487182
       }]);
+    })
+    .then(() => {
+      return knex.raw(
+        "SELECT setval('tracks_id_seq', (SELECT MAX(id) FROM tracks));"
+      );
     });
 };
