@@ -6,6 +6,8 @@ const port = process.env.PORT || 8000;
 
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 
 const artists = require('./routes/artists');
 const tracks = require('./routes/tracks');
@@ -18,6 +20,12 @@ app.disable('x-powered-by');
 
 app.use(morgan('short'));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['some_secure_key']
+}));
 
 app.use(artists);
 app.use(tracks);
