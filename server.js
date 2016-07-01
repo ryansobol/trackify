@@ -1,5 +1,9 @@
 'use strict';
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ silent: true });
+}
+
 const express = require('express');
 const path = require('path');
 const port = process.env.PORT || 8000;
@@ -23,8 +27,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(cookieSession({
-  name: 'session',
-  keys: ['some_secure_key']
+  name: 'trackify_session',
+  secret: process.env.SESSION_SECRET
 }));
 
 app.use(artists);
