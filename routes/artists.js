@@ -4,6 +4,9 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
 
+const ev = require('express-validation');
+const validations = require('../validations/schema');
+
 router.get('/artists', (_req, res, next) => {
   knex('artists')
     .orderBy('id')
@@ -27,7 +30,7 @@ router.get('/artists/:id', (req, res, next) => {
     });
 });
 
-router.post('/artists', (req, res, next) => {
+router.post('/artists', ev(validations.artists), (req, res, next) => {
   knex('artists')
     .insert(req.body, '*')
     .then((artists) => {

@@ -12,6 +12,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+const ev = require('express-validation');
 
 const artists = require('./routes/artists');
 const tracks = require('./routes/tracks');
@@ -41,6 +42,10 @@ app.use((_req, res) => {
 });
 
 app.use((err, _req, res, _next) => {
+  if (err instanceof ev.ValidationError) {
+    return res.status(err.status).json(err);
+  }
+
   console.error(err);
   res.sendStatus(500);
 });
