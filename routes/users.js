@@ -55,6 +55,8 @@ router.post('/users', ev(validations.users), (req, res, next) => {
 
     knex('users')
       .insert({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
         email: req.body.email,
         hashed_password: hashed_password
       })

@@ -32,6 +32,8 @@ app.use(cookieSession({
   secret: process.env.SESSION_SECRET
 }));
 
+app.use(express.static(path.join('public')));
+
 app.use(artists);
 app.use(tracks);
 app.use(users);
