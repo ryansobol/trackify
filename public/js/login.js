@@ -32,7 +32,7 @@
         return;
       }
 
-      window.location.href = '/';
+      Materialize.toast(`${email} successfully logged in.`);
     });
 
     $xhr.fail(() => {
