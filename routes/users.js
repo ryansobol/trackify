@@ -6,7 +6,7 @@ const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt');
 const ev = require('express-validation');
-const validations = require('../validations/schema');
+const validations = require('../validations/users');
 
 const checkAuth = function(req, res, next) {
   if (!req.session.user) {
@@ -47,7 +47,7 @@ router.post('/users/artists/:artistId', checkAuth, (req, res, next) => {
     });
 });
 
-router.post('/users', ev(validations.users), (req, res, next) => {
+router.post('/users', ev(validations.post), (req, res, next) => {
   bcrypt.hash(req.body.password, 12, (hashErr, hashed_password) => {
     if (hashErr) {
       return next(hashErr);

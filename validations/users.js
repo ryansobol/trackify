@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 
-module.exports.users = {
+module.exports.post = {
   body: {
     email: Joi.string()
       .email()
@@ -13,20 +13,7 @@ module.exports.users = {
       .required(),
     password: Joi.string()
       .regex(/[a-zA-Z0-9]{3,30}/)
-      // .alphaNum()
-      // .min(3)
-      // .max(30)
       .label('Password')
-      .trim()
-      .required()
-  }
-};
-
-module.exports.artists = {
-  body: {
-    name: Joi.string()
-      .max(63)
-      .label('Artist name')
       .trim()
       .required()
   }
